@@ -1,0 +1,19 @@
+{
+  "name": "@brenoroosevelt/service-layer",
+  "version": "0.1.0",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublishOnly": "npm run tsc"
+  },
+  "dependencies": {
+    "axios": "*"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
