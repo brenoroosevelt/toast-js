@@ -4,9 +4,6 @@ import Payload from "./payload";
 import Exception from "./error/exception";
 import Violations from "./error/violations";
 import Error from "./error/error";
-import {toast} from "./toast";
-
-toast.add('')
 
 export {
     add,
@@ -14,6 +11,5 @@ export {
     Exception,
     Payload,
     Violations,
-    Error,
-    toast
+    Error
 }

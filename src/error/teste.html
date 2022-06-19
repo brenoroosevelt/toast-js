@@ -70,8 +70,162 @@
     //     task().then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2'))
     // ])
 
+    // justify: 'end', 'start', 'center'
+    // y: 'top', 'bottom'
+    // x: 'left', 'right'
+    // gap:
+    //
+
+    class Toast {
+        constructor(config = { position: "top", justify: "end" }) {
+            this.container = null;
+            this.config = {
+                position: 'top',
+                justify: 'end',
+                closeBtn: true,
+                duration: 5000,
+                bgColor: '#333',
+                color: '#fff'
+            };
+            this.config = Object.assign(Object.assign({}, this.config), config);
+        }
+        createContainer() {
+            const container = document.createElement('div');
+            container.style.fontFamily = 'sans-serif';
+            container.style.fontSize = '1rem';
+            container.style.position = 'fixed';
+            container.style[this.config.position || 'top'] = '0'; // aqui
+            container.style['left'] = '0';
+            container.style.width = '100%';
+            container.style.margin = '1rem 0';
+            container.style.padding = '0';
+            container.style.display = 'grid';
+            container.style.justifyItems = this.config.justify || 'end'; // aqui
+            container.style.gap = '0.5rem';
+            container.style.pointerEvents = 'none';
+            return container;
+        }
+        create(message, config = {}) {
+            var _a, _b;
+            const _config = Object.assign(Object.assign({}, this.config), config);
+            if (!(this.container instanceof Element)) {
+                this.container = (_a = document.body) === null || _a === void 0 ? void 0 : _a.insertAdjacentElement('afterbegin', this.createContainer());
+            }
+            const toaster = document.createElement('div');
+            toaster.style.padding = '0.5rem';
+            toaster.style.margin = '0 1rem';
+            toaster.style.borderRadius = '3px';
+            toaster.style.backgroundColor = _config.bgColor || '#333';
+            toaster.style.color = _config.color || '#fff';
+            toaster.style.pointerEvents = 'auto';
+            const msg = document.createElement('div');
+            msg.innerHTML = message;
+            if (_config.closeBtn) {
+                toaster.appendChild(this.createCloseButton());
+            }
+            toaster.appendChild(msg);
+            (_b = this.container) === null || _b === void 0 ? void 0 : _b.appendChild(toaster);
+            if (_config.duration) {
+                setTimeout(() => toaster.remove(), _config.duration);
+            }
+            return toaster;
+        }
+        createCloseButton() {
+            const closeBtn = document.createElement('div');
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.background = 'rgba(0,0,0,0.1)';
+            closeBtn.style.borderRadius = '3px';
+            closeBtn.style.padding = '2px 5px';
+            closeBtn.style.marginLeft = '0.5rem';
+            closeBtn.style.display = 'flex';
+            closeBtn.style.float = 'right';
+            closeBtn.style.alignItems = 'center';
+            closeBtn.innerHTML = '&#x2715';
+            closeBtn.addEventListener('click', () => { var _a; return (_a = closeBtn.parentElement) === null || _a === void 0 ? void 0 : _a.remove(); });
+            return closeBtn;
+        }
+        set position(v) {
+            this.config.position = v;
+        }
+        set justify(v) {
+            this.config.justify = v;
+        }
+        set bgColor(v) {
+            this.config.bgColor = v;
+        }
+        set color(v) {
+            this.config.color = v;
+        }
+        set closeBtn(v) {
+            this.config.closeBtn = v;
+        }
+        set duration(v) {
+            this.config.duration = v;
+        }
+        get position() {
+            return this.config.position;
+        }
+        get justify() {
+            return this.config.justify;
+        }
+        get bgColor() {
+            return this.config.bgColor;
+        }
+        get color() {
+            return this.config.color;
+        }
+        get closeBtn() {
+            return this.config.closeBtn;
+        }
+        get duration() {
+            return this.config.duration;
+        }
+        info(message, config = {}) {
+            return this.create(message, Object.assign(Object.assign({}, config), { bgColor: "#333" }));
+        }
+        warning(message, config = {}) {
+            return this.create(message, Object.assign(Object.assign({}, config), { bgColor: "orange" }));
+        }
+        error(message, config = {}) {
+            return this.create(message, Object.assign(Object.assign({}, config), { bgColor: "red" }));
+        }
+        success(message, config = {}) {
+            return this.create(message, Object.assign(Object.assign({}, config), { bgColor: "teal" }));
+        }
+        static topLeft(config = {}) {
+            return Toast._topLeft || (Toast._topLeft = new Toast(Object.assign(Object.assign({}, config), { position: "top", "justify": "start" })));
+        }
+        static topRight(config = {}) {
+            return new Toast(Object.assign(Object.assign({}, config), { position: "top", "justify": "end" }));
+        }
+        static topCenter(config = {}) {
+            return new Toast(Object.assign(Object.assign({}, config), { position: "top", "justify": "center" }));
+        }
+        static bottomLeft(config = {}) {
+            return new Toast(Object.assign(Object.assign({}, config), { position: "bottom", "justify": "start" }));
+        }
+        static bottomRight(config = {}) {
+            return new Toast(Object.assign(Object.assign({}, config), { position: "bottom", "justify": "end" }));
+        }
+        static bottomCenter(config = {}) {
+            return new Toast(Object.assign(Object.assign({}, config), { position: "bottom", "justify": "center" }));
+        }
+    }
+    Toast._topLeft = null;
+    Toast._topCenter = null;
+    Toast._topRight = null;
 
 
+    const t = Toast.topCenter()
+    const t2 = Toast.bottomLeft()
 </script>
+<button onclick="t.success('Houve um problema ao processar a solicitação. Por favor, verifique  erros espcíficos' + (new Date).getMilliseconds(), {})">asd</button>
+<button onclick="Toast.topLeft().info('Houve um problema ao processar a solicitação. Por favor, verifique ' + (new Date).getMilliseconds(), {})">asd2</button>
+aamsdfa.,dmfadfaj dsflk j akldf jkajdsflkajdlkfjalkdfj lkad sfkla dlkfjalkdsfjalkdf lkajdsflkajdsflkjalkdsfjlakdfkla dsfklajsdf aklsdjf lkajsdflkajdçlkfjaç dlfaj fdlk
+<div class="toast" style="display: flex; justify-content: space-between">
+    <div style="">asdd tes tes s  sssssas ass <br/>asdasdsa</div>
+    <div style="cursor:pointer;justify-items: end; background: rgba(0, 0, 0, 0.1); border-radius: 3px; padding: 5px 10px; display: flex; align-items: center;">&#x2715</div>
+</div>
+
 </body>
 </html>
