@@ -9,7 +9,7 @@ export default class Payload {
         this.isOk = this.error !== undefined
     }
 
-    public static ok(data: any): Payload {
+    public static success(data: any): Payload {
         return new Payload(data);
     }
 

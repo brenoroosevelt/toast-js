@@ -1,0 +1,77 @@
+<html>
+<body>
+<div id="loading"></div>
+<script>
+    class WithLoading {
+        constructor(onChange) {
+            this._loading = 0
+            this._count = 0
+            this._onChange = onChange instanceof Function ? onChange : () => null
+        }
+
+        async execute(promise) {
+            this._onChange(++this._loading, ++this._count)
+            return promise.finally(() => this._onChange(--this._loading, --this._count))
+        }
+
+        async all(promises = []) {
+            this._onChange(this._loading += promises.length, this._count += promises.length)
+            promises.forEach((p) => p.finally(() => this._onChange(--this._loading, --this._count)))
+            return Promise.all(promises)
+        }
+
+        get loading() {
+            return this._loading
+        }
+    }
+
+    async function withStatus(promise, status) {
+        if (!(status instanceof Status)) {
+            throw new TypeError('Invalid Status')
+        }
+
+        if (!(promise instanceof Promise)) {
+            throw new TypeError('Invalid Promise')
+        }
+
+        status.onchange(++status.loading)
+        return promise.finally(() => status.onchange(--status.loading))
+    }
+
+    async function task() {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('taks resolve')
+                resolve(1)
+            }, Math.random() * 5000)
+        })
+    }
+
+    class Status {
+        constructor(onchange) {
+            this.loading = 0
+            this.onchange = onchange instanceof Function ? onchange : () => null
+        }
+    }
+
+    const status = new Status(
+        (pending) => document.querySelector('#loading').textContent = pending ? 'Carregando: ' + pending : 'Pronto'
+    )
+
+    withStatus(task(), status)
+
+    // load.execute(task()).then(()=>console.log('resolveu1')).finally(()=>console.log('finnna1'))
+    // load.execute(task()).then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2'))
+    // load.execute(task()).then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2'))
+    // load.execute(task()).then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2'))
+    // load.all([
+    //     task().then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2')),
+    //     task().then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2')),
+    //     task().then(()=>console.log('resolveu2')).finally(()=>console.log('finnna2'))
+    // ])
+
+
+
+</script>
+</body>
+</html>

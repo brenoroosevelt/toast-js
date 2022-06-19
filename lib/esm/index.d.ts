@@ -4,4 +4,5 @@ import Payload from "./payload";
 import Exception from "./error/exception";
 import Violations from "./error/violations";
 import Error from "./error/error";
-export { add, subtract, Exception, Payload, Violations, Error };
+import { toast } from "./toast";
+export { add, subtract, Exception, Payload, Violations, Error, toast };

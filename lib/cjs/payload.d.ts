@@ -3,6 +3,6 @@ export default class Payload {
     readonly error: object | string | undefined;
     readonly isOk: Boolean;
     private constructor();
-    static ok(data: any): Payload;
+    static success(data: any): Payload;
     static error(error: object | string, data?: any): Payload;
 }
