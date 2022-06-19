@@ -60,6 +60,6 @@ class Status {
 }
 
 async function withStatus(promise: Promise<any>, status: Status) {
-    status.start()
+    status.start();
     return promise.finally(() => status.finish())
 }
