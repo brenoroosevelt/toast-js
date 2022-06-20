@@ -32,7 +32,7 @@ export default class Toast {
         ['info', {type: 'success', bgColor: 'teal', color: '#fff', closeBtn: true, duration: 8000}],
         ['success', {type: 'success', bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
         ['warning', {type: 'warning', bgColor: '#fd7e14', color: '#fff', closeBtn: true, duration: 8000}],
-        ['error', {type: 'error', bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
+        ['error', {type: 'error', bgColor: '#dc3545', color: '#fff', closeBtn: true, duration: 8000}],
     ])
 
     private static instances = new Map<string, Toast>([
