@@ -76,15 +76,21 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
 const notify = (message: string, options: ToastOptions | object = {}): HTMLDivElement => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
+    const container = getContainer(_options)
     const toast = <HTMLDivElement>el()
+    const msg = el()
+    const rm = () => toast.remove()
+
     toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
+    toast.appendChild(msg)
 
-    const msg = el()
+    container.prepend(toast)
+    container.style.zIndex = _options.zIndex.toString()
+
     msg.style.display = 'flex'
     msg.innerHTML = message
-    const rm = () => toast.remove()
 
     if (_options.dismissible) {
         ev(toast, 'click', rm)
@@ -98,16 +104,12 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
         ev(btn, 'click', rm)
     }
 
-    toast.appendChild(msg)
-    const container = getContainer(_options)
-    container.prepend(toast)
-    container.style.zIndex = _options.zIndex.toString()
-    ev(toast, 'click', () => toast.classList.remove('toast-animation'))
-    toast.classList.add('toast-animation');
-
     if (_options.duration) {
         setTimeout(rm, _options.duration)
     }
+
+    ev(toast, 'click', () => toast.classList.remove('toast-animation'))
+    toast.classList.add('toast-animation');
 
     return toast
 }
