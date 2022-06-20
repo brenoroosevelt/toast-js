@@ -1,6 +1,6 @@
 {
-  "name": "@brenoroosevelt/service-layer",
-  "version": "1.0.1",
+  "name": "@brenoroosevelt/toast",
+  "version": "1.0.2",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "files": [
