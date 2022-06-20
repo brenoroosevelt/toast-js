@@ -84,7 +84,7 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
     const msg = el()
     msg.style.display = 'flex'
     msg.innerHTML = message
-    const rm = () => toast?.remove()
+    const rm = () => toast.remove()
 
     if (_options.dismissible) {
         ev(toast, 'click', rm)
@@ -102,7 +102,7 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
     const container = getContainer(_options)
     container.prepend(toast)
     container.style.zIndex = _options.zIndex.toString()
-    ev(toast, 'click', () => toast?.classList.remove('toast-animation'))
+    ev(toast, 'click', () => toast.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
 
     if (_options.duration) {
