@@ -10,7 +10,8 @@ type ToastOptions = {
     duration: number,
     closeBtn: boolean,
     zIndex: number,
-    dismissible: boolean
+    dismissible: boolean,
+    shadow: boolean
 }
 
 const _default: ToastOptions = {
@@ -21,7 +22,8 @@ const _default: ToastOptions = {
     closeBtn: true,
     duration: 10000,
     zIndex: 99999,
-    dismissible: false
+    dismissible: false,
+    shadow: true
 }
 
 const ToastTypes = {
@@ -88,6 +90,7 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
 
     if (_options.dismissible) ev(toast, 'click', rm)
     if (_options.duration) setTimeout(rm, _options.duration)
+    if (_options.shadow) toast.style.boxShadow = '0 0.05rem 0.75rem rgba(0, 0, 0, 0.5)'
     if (_options.closeBtn) {
         const btn = el()
         btn.classList.add('toast-btn')
@@ -96,7 +99,7 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
         ev(btn, 'click', rm)
     }
 
-    ev(toast, 'click', () => toast.classList.remove('toast-animation'))
+    ev(toast, 'animationend', () => toast.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
     toast.appendChild(msg)
     container.prepend(toast)
