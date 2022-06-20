@@ -61,7 +61,7 @@ const initialize = () => {
     initialized = <boolean|null>document.body?.insertAdjacentElement('beforebegin', style);
 }
 
-const getContainer = (options: ToastOptions): Element => {
+const getContainer = (options: ToastOptions): HTMLDivElement => {
     initialize();
     const id = `toast-container-${options.position}-${options.justify}`;
     const container = <HTMLDivElement>(document.querySelector(`#${id}`) || el())
@@ -73,10 +73,10 @@ const getContainer = (options: ToastOptions): Element => {
     return container
 }
 
-const notify = (message: string, options: ToastOptions | object = {}) => {
+const notify = (message: string, options: ToastOptions | object = {}): HTMLDivElement => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
-    const toast = el()
+    const toast = <HTMLDivElement>el()
     toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
@@ -100,11 +100,8 @@ const notify = (message: string, options: ToastOptions | object = {}) => {
 
     toast.appendChild(msg)
     const container = getContainer(_options)
-    if (container instanceof HTMLDivElement) {
-        container.prepend(toast)
-        container.style.zIndex = _options.zIndex.toString()
-    }
-
+    container.prepend(toast)
+    container.style.zIndex = _options.zIndex.toString()
     ev(toast, 'click', () => toast?.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
 
