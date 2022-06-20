@@ -81,9 +81,6 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
     toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
-    toast.appendChild(msg)
-
-    container.prepend(toast)
     container.style.zIndex = _options.zIndex.toString()
 
     msg.style.display = 'flex'
@@ -101,6 +98,8 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
 
     ev(toast, 'click', () => toast.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
+    toast.appendChild(msg)
+    container.prepend(toast)
 
     return <HTMLDivElement>toast
 }
