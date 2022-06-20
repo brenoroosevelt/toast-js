@@ -51,7 +51,7 @@ const initialize = () => {
     style.innerText = [
         '@keyframes toast-animate{from{transform:scaleY(0);opacity:0;}to{transform:scaleY(1);opacity:1;}}',
         '.toast-container{font-family:sans-serif;font-size:1rem;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.5rem;pointer-events:none}',
-        '.toast-element{padding:0.5rem margin:0 1rem;border-radius:3px;pointer-events:auto}',
+        '.toast-element{padding:0.5rem;margin:0 1rem;border-radius:3px;pointer-events:auto}',
         '.toast-animation{transform-origin:50% 0;animation: toast-animate .2s linear}',
         '.toast-btn{display:flex;float:right;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:2px 5px;margin-left:0.5rem;border-radius:3px}',
     ].join('')
