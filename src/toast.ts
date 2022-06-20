@@ -43,25 +43,30 @@ const ToastTypes = {
     }
 }
 
+let initialized: boolean | null = false
+
+const initialize = () => {
+    if (initialized) return
+    const style = document.createElement('style')
+    style.innerText = [
+        '@keyframes toast-animate{from{transform:scaleY(0);opacity:0;}to{transform:scaleY(1);opacity:1;}}',
+        '.toast-container{font-family:sans-serif;font-size:1rem;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.5rem;pointer-events:none}',
+        '.toast-element{padding:0.5rem margin:0 1rem;border-radius:3px;pointer-events:auto}',
+        '.toast-animation{transform-origin:50% 0;animation: toast-animate .2s linear}',
+        '.toast-btn{display:flex;float:right;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:2px 5px;margin-left:0.5rem;border-radius:3px}',
+    ].join('')
+    initialized = <boolean|null>document.body?.insertAdjacentElement('beforebegin', style);
+}
+
 const getContainer = (options: ToastOptions): Element => {
-    const id = `toast-container-${options.position}-${options.justify}`
+    initialize();
+    const id = `toast-container-${options.position}-${options.justify}`;
     const container = <HTMLDivElement>(document.querySelector(`#${id}`) || document.createElement('div'))
     container.id = id
-    container.style.fontFamily = 'sans-serif';
-    container.style.fontSize = '1rem';
-    container.style.position = 'fixed';
+    container.classList.add('toast-container')
     container.style[options.position] = '0';
-    container.style['left'] = '0';
-    container.style.width = '100%';
-    container.style.margin = '1rem 0';
-    container.style.padding = '0';
-    container.style.display = 'grid';
     container.style.justifyItems = options.justify;
-    container.style.gap = '0.5rem';
-    container.style.pointerEvents = 'none'
-
     document.body?.appendChild(container)
-
     return container
 }
 
@@ -69,12 +74,9 @@ const notify = (message: string, options: ToastOptions | object = {}) => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
     const toast = document.createElement('div')
-    toast.style.padding = '0.5rem';
-    toast.style.margin = '0 1rem';
-    toast.style.borderRadius = '3px';
+    toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
-    toast.style.pointerEvents = 'auto'
 
     const msg = document.createElement('div')
     msg.style.display = 'flex'
@@ -85,7 +87,9 @@ const notify = (message: string, options: ToastOptions | object = {}) => {
     }
 
     if (_options.closeBtn) {
-        const btn = createCloseButton()
+        const btn = document.createElement('div')
+        btn.classList.add('toast-btn')
+        btn.innerHTML = '&#x2715'
         toast.appendChild(btn)
         btn.addEventListener('click', () => toast?.remove())
     }
@@ -93,30 +97,18 @@ const notify = (message: string, options: ToastOptions | object = {}) => {
     toast.appendChild(msg)
     const container = getContainer(_options)
     if (container instanceof HTMLDivElement) {
-        container.appendChild(toast)
+        container.prepend(toast)
         container.style.zIndex = _options.zIndex.toString()
     }
 
+    toast.addEventListener('animationend', () => toast?.classList.remove('toast-animation'))
+    toast.classList.add('toast-animation');
+
     if (_options.duration) {
-        setTimeout(() => toast.remove(), _options.duration)
+        setTimeout(() => toast?.remove(), _options.duration)
     }
 
     return toast
-}
-
-const createCloseButton = (): HTMLDivElement => {
-    const btn = document.createElement('div')
-    btn.style.cursor = 'pointer'
-    btn.style.background = 'rgba(0,0,0,0.1)'
-    btn.style.borderRadius = '3px'
-    btn.style.padding = '2px 5px'
-    btn.style.marginLeft = '0.5rem'
-    btn.style.display = 'flex'
-    btn.style.float = 'right';
-    btn.style.alignItems = 'center'
-    btn.innerHTML = '&#x2715'
-
-    return btn
 }
 
 const info = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'info'}})

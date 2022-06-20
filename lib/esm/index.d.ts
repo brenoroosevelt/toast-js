@@ -1,2 +1,2 @@
-import { ToastOptions, ToastTypes, create, info, warning, success, error } from "./toast";
-export { ToastOptions, ToastTypes, create, info, warning, success, error };
+import { ToastOptions, ToastTypes, notify, info, warning, success, error } from "./toast";
+export { ToastOptions, ToastTypes, notify, info, warning, success, error };

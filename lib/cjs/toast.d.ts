@@ -16,9 +16,9 @@ declare const ToastTypes: {
     getType(name: string): ToastOptions;
     setType(name: string, type: object): void;
 };
-declare const create: (message: string, options?: ToastOptions | object) => HTMLDivElement;
+declare const notify: (message: string, options?: ToastOptions | object) => HTMLDivElement;
 declare const info: (message: string, options?: ToastOptions | object) => HTMLDivElement;
 declare const warning: (message: string, options?: ToastOptions | object) => HTMLDivElement;
 declare const error: (message: string, options?: ToastOptions | object) => HTMLDivElement;
 declare const success: (message: string, options?: ToastOptions | object) => HTMLDivElement;
-export { ToastOptions, ToastTypes, create, info, warning, error, success };
+export { ToastOptions, ToastTypes, notify, info, warning, error, success };
