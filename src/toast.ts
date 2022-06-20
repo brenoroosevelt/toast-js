@@ -19,9 +19,9 @@ const _default: ToastOptions = {
     bgColor: '#333',
     color: '#fff',
     closeBtn: true,
-    duration: 8000,
+    duration: 10000,
     zIndex: 99999,
-    dismissible: true
+    dismissible: false
 }
 
 const ToastTypes = {
