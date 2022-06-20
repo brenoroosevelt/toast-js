@@ -23,6 +23,7 @@ export default class Toast {
 
     private static defaultPosition: ToastPosition = 'top'
     private static defaultJustify: ToastJustify = 'center'
+    public static zIndex: number = 99999
 
     private container: HTMLDivElement | null = null
 
@@ -101,7 +102,10 @@ export default class Toast {
         }
 
         toaster.appendChild(msg)
-        this.container?.appendChild(toaster)
+        if (this.container instanceof HTMLDivElement) {
+            this.container.appendChild(toaster)
+            this.container.style.zIndex = Toast.zIndex.toString()
+        }
 
         if (_config.duration) {
             setTimeout(() => toaster.remove(), _config.duration)
@@ -131,6 +135,7 @@ export default class Toast {
         const _justify: ToastJustify = config.justify || Toast.defaultJustify
         const defaultInstance = Toast.instances.get('top-center')
         const instance: Toast = (<Toast>Toast.instances.get(_position + '-' +_justify))
+        const _instance = (instance || defaultInstance)
         return (instance || defaultInstance).create(message, config)
     }
 
