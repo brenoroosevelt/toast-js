@@ -43,11 +43,14 @@ const ToastTypes = {
     }
 }
 
+const el = (e = 'div') => document.createElement(e)
+const ev = (el: Element, ev: string, f: any) => el.addEventListener(ev, f)
+
 let initialized: boolean | null = false
 
 const initialize = () => {
     if (initialized) return
-    const style = document.createElement('style')
+    const style = el('style')
     style.innerText = [
         '@keyframes toast-animate{from{transform:scaleY(0);opacity:0;}to{transform:scaleY(1);opacity:1;}}',
         '.toast-container{font-family:sans-serif;font-size:1rem;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.5rem;pointer-events:none}',
@@ -61,7 +64,7 @@ const initialize = () => {
 const getContainer = (options: ToastOptions): Element => {
     initialize();
     const id = `toast-container-${options.position}-${options.justify}`;
-    const container = <HTMLDivElement>(document.querySelector(`#${id}`) || document.createElement('div'))
+    const container = <HTMLDivElement>(document.querySelector(`#${id}`) || el())
     container.id = id
     container.classList.add('toast-container')
     container.style[options.position] = '0';
@@ -73,25 +76,26 @@ const getContainer = (options: ToastOptions): Element => {
 const notify = (message: string, options: ToastOptions | object = {}) => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
-    const toast = document.createElement('div')
+    const toast = el()
     toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
 
-    const msg = document.createElement('div')
+    const msg = el()
     msg.style.display = 'flex'
     msg.innerHTML = message
+    const rm = () => toast?.remove()
 
     if (_options.dismissible) {
-        toast.addEventListener('click', () => toast?.remove())
+        ev(toast, 'click', rm)
     }
 
     if (_options.closeBtn) {
-        const btn = document.createElement('div')
+        const btn = el()
         btn.classList.add('toast-btn')
         btn.innerHTML = '&#x2715'
         toast.appendChild(btn)
-        btn.addEventListener('click', () => toast?.remove())
+        ev(btn, 'click', rm)
     }
 
     toast.appendChild(msg)
@@ -101,11 +105,11 @@ const notify = (message: string, options: ToastOptions | object = {}) => {
         container.style.zIndex = _options.zIndex.toString()
     }
 
-    toast.addEventListener('animationend', () => toast?.classList.remove('toast-animation'))
+    ev(toast, 'click', () => toast?.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
 
     if (_options.duration) {
-        setTimeout(() => toast?.remove(), _options.duration)
+        setTimeout(rm, _options.duration)
     }
 
     return toast
