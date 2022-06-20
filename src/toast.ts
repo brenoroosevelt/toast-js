@@ -30,9 +30,9 @@ export default class Toast {
     private static types = new Map<string, ToastType>([
         ['default', {type: 'default', bgColor: '#333', color: '#fff', closeBtn: true, duration: 8000}],
         ['info', {type: 'success', bgColor: 'teal', color: '#fff', closeBtn: true, duration: 8000}],
-        ['success', {type: 'success', bgColor: 'green', color: '#fff', closeBtn: true, duration: 8000}],
-        ['warning', {type: 'warning', bgColor: 'orange', color: '#fff', closeBtn: true, duration: 8000}],
-        ['error', {type: 'error', bgColor: 'red', color: '#fff', closeBtn: true, duration: 8000}],
+        ['success', {type: 'success', bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
+        ['warning', {type: 'warning', bgColor: '#fd7e14', color: '#fff', closeBtn: true, duration: 8000}],
+        ['error', {type: 'error', bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
     ])
 
     private static instances = new Map<string, Toast>([
