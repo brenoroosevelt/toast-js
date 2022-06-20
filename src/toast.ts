@@ -27,11 +27,11 @@ const _default: ToastOptions = {
 const ToastTypes = {
     default: _default,
     _types: new Map<string, object>([
-        ['default', {bgColor: '#ddd'}],
-        ['info', {bgColor: 'teal'}],
-        ['warning', {bgColor: '#fd7e14'}],
-        ['error', {bgColor: '#dc3545'}],
-        ['success', {bgColor: '#198754'}]
+        ['default', {bgColor: '#333'}],
+        ['info', {bgColor: '#2f96b4'}],
+        ['warning', {bgColor: '#f89406'}],
+        ['error', {bgColor: '#ee6363'}],
+        ['success', {bgColor: '#51a351'}]
     ]),
 
     getType(name: string): ToastOptions {
@@ -65,7 +65,7 @@ const getContainer = (options: ToastOptions): Element => {
     return container
 }
 
-const create = (message: string, options: ToastOptions | object = {}) => {
+const notify = (message: string, options: ToastOptions | object = {}) => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
     const toast = document.createElement('div')
@@ -81,13 +81,13 @@ const create = (message: string, options: ToastOptions | object = {}) => {
     msg.innerHTML = message
 
     if (_options.dismissible) {
-        msg.addEventListener('click', () => msg?.parentElement?.remove())
+        toast.addEventListener('click', () => toast?.remove())
     }
 
     if (_options.closeBtn) {
         const btn = createCloseButton()
         toast.appendChild(btn)
-        btn.addEventListener('click', () => btn?.parentElement?.remove())
+        btn.addEventListener('click', () => toast?.remove())
     }
 
     toast.appendChild(msg)
@@ -119,15 +119,15 @@ const createCloseButton = (): HTMLDivElement => {
     return btn
 }
 
-const info = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'info'}})
-const warning = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'warning'}})
-const error = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'error'}})
-const success = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'success'}})
+const info = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'info'}})
+const warning = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'warning'}})
+const error = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'error'}})
+const success = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'success'}})
 
 export {
     ToastOptions,
     ToastTypes,
-    create,
+    notify,
     info,
     warning,
     error,

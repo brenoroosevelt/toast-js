@@ -1,7 +1,7 @@
 import {
     ToastOptions,
     ToastTypes,
-    create,
+    notify,
     info,
     warning,
     success,
@@ -11,7 +11,7 @@ import {
 export {
     ToastOptions,
     ToastTypes,
-    create,
+    notify,
     info,
     warning,
     success,
