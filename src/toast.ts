@@ -77,6 +77,7 @@ const create = (message: string, options: ToastOptions | object = {}) => {
     toast.style.pointerEvents = 'auto'
 
     const msg = document.createElement('div')
+    msg.style.display = 'flex'
     msg.innerHTML = message
 
     if (_options.dismissible) {
@@ -118,10 +119,10 @@ const createCloseButton = (): HTMLDivElement => {
     return btn
 }
 
-const info = (message: string, options: ToastOptions | object = {type: 'info'}) => create(message, options)
-const warning = (message: string, options: ToastOptions | object = {type: 'warning'}) => create(message, options)
-const error = (message: string, options: ToastOptions | object = {type: 'error'}) => create(message, options)
-const success = (message: string, options: ToastOptions | object = {type: 'success'}) => create(message, options)
+const info = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'info'}})
+const warning = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'warning'}})
+const error = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'error'}})
+const success = (message: string, options: ToastOptions | object = {}) => create(message, {...options, ...{type: 'success'}})
 
 export {
     ToastOptions,
