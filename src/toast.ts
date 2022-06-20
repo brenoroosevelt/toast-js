@@ -2,7 +2,7 @@ type ToastPosition = 'top' | 'bottom'
 type ToastJustify = 'start' | 'center' | 'end'
 
 type ToastType = {
-    type: string,
+    type?: string,
     closeBtn: boolean,
     duration: number,
     bgColor: string,
@@ -28,11 +28,11 @@ export default class Toast {
     private container: HTMLDivElement | null = null
 
     private static types = new Map<string, ToastType>([
-        ['default', {type: 'default', bgColor: '#333', color: '#fff', closeBtn: true, duration: 8000}],
-        ['info', {type: 'success', bgColor: 'teal', color: '#fff', closeBtn: true, duration: 8000}],
-        ['success', {type: 'success', bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
-        ['warning', {type: 'warning', bgColor: '#fd7e14', color: '#fff', closeBtn: true, duration: 8000}],
-        ['error', {type: 'error', bgColor: '#dc3545', color: '#fff', closeBtn: true, duration: 8000}],
+        ['default', {bgColor: '#333', color: '#fff', closeBtn: true, duration: 8000}],
+        ['info', {bgColor: 'teal', color: '#fff', closeBtn: true, duration: 8000}],
+        ['success', {bgColor: '#198754', color: '#fff', closeBtn: true, duration: 8000}],
+        ['warning', {bgColor: '#fd7e14', color: '#fff', closeBtn: true, duration: 8000}],
+        ['error', {bgColor: '#dc3545', color: '#fff', closeBtn: true, duration: 8000}],
     ])
 
     private static instances = new Map<string, Toast>([
@@ -50,8 +50,8 @@ export default class Toast {
     ) {
     }
 
-    public static setType(anType: ToastType): void {
-        Toast.types.set(anType.type, anType)
+    public static setType(name: string, anType: ToastType): void {
+        Toast.types.set(name, anType)
     }
 
     private createContainer(): HTMLDivElement {
@@ -74,8 +74,8 @@ export default class Toast {
 
     public create(message: string, config: ToastType | object = {}): HTMLDivElement {
         let type: ToastType = <ToastType>Toast.types.get('default')
-        if ('type' in config && Toast.types.has(config['type'])) {
-            type = <ToastType>Toast.types.get(config['type'])
+        if ('type' in config && Toast.types.has(<string>config['type'])) {
+            type = <ToastType>Toast.types.get(<string>config['type'])
         }
         const _config: ToastType = {...type, ...config}
 
