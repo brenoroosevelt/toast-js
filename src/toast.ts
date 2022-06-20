@@ -19,7 +19,7 @@ type ToastCreation = {
     color?: string,
 }
 
-class Toast {
+export default class Toast {
 
     private static defaultPosition: ToastPosition = 'top'
     private static defaultJustify: ToastJustify = 'center'

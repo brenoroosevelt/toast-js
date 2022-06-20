@@ -85,6 +85,7 @@
         createContainer() {
             const container = document.createElement('div');
             container.style.fontFamily = 'sans-serif';
+            container.style.fontWeight = 'normal';
             container.style.fontSize = '1rem';
             container.style.position = 'fixed';
             container.style[this.position] = '0';
@@ -149,16 +150,21 @@
             return (instance || defaultInstance).create(message, config);
         }
         static info(message, config = {}) {
-            Toast.default(message, Object.assign(Object.assign({}, config), { type: 'info' }));
+            return Toast.default(message, Object.assign(Object.assign({}, config), { type: 'info' }));
         }
         static warning(message, config = {}) {
-            Toast.default(message, Object.assign(Object.assign({}, config), { type: 'warning' }));
+            return Toast.default(message, Object.assign(Object.assign({}, config), { type: 'warning' }));
         }
         static error(message, config = {}) {
-            Toast.default(message, Object.assign(Object.assign({}, config), { type: 'error' }));
+            return Toast.default(message, Object.assign(Object.assign({}, config), { type: 'error' }));
         }
         static success(message, config = {}) {
-            Toast.default(message, Object.assign(Object.assign({}, config), { type: 'success' }));
+            return Toast.default(message, Object.assign(Object.assign({}, config), { type: 'success' }));
+        }
+        static setDefaults(config = {}) {
+            Toast.defaultPosition = config.position || Toast.defaultPosition;
+            Toast.defaultJustify = config.justify || Toast.defaultJustify;
+            Toast.types.set('default', Object.assign(Object.assign({}, Toast.types.get('default')), config));
         }
     }
     Toast.defaultPosition = 'top';
@@ -179,16 +185,14 @@
         ['bottom-end', new Toast("bottom", "end")],
     ]);
 
-
     const t = new Toast('top', 'right')
-    Toast.defaultPosition = 'qtop'
-    Toast.defaultJustify = 'start'
+    Toast.setDefaults({bgColor: 'black', closeBtn: false, position: 'bottom', justify: 'center'})
 
 </script>
 <body>
 <div id="loading"></div>
-<button onclick="t.create('Houve um problema ao processar a solicitação. ' + (new Date).getMilliseconds(), {})">asd</button>
-<button onclick="Toast.default('Houve um problema ao processar a solicitação. Por favor, verifique ' + (new Date).getMilliseconds(), {justify: 'start'})">asd2</button>
+<button onclick="t.create('Houve um problema ao processar a solicitação. ' + (new Date).getMilliseconds(), {closeBtn: true})">asd</button>
+<button onclick="Toast.default('Houve um problema ao processar a solicitação. Por favor, verifique ' + (new Date).getMilliseconds())">asd2</button>
 aamsdfa.,dmfadfaj dsflk j akldf jkajdsflkajdlkfjalkdfj lkad sfkla dlkfjalkdsfjalkdf lkajdsflkajdsflkjalkdsfjlakdfkla dsfklajsdf aklsdjf lkajsdflkajdçlkfjaç dlfaj fdlk
 <div class="toast" style="display: flex; justify-content: space-between">
     <div style="">asdd tes tes s  sssssas ass <br/>asdasdsa</div>
