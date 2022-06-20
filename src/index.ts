@@ -1,5 +1,19 @@
-import Toast from "./toast";
+import {
+    ToastOptions,
+    ToastTypes,
+    create,
+    info,
+    warning,
+    success,
+    error
+} from "./toast";
 
 export {
-    Toast,
+    ToastOptions,
+    ToastTypes,
+    create,
+    info,
+    warning,
+    success,
+    error
 }
