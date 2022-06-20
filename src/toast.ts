@@ -67,7 +67,7 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
     const container = <HTMLDivElement>(document.querySelector(`#${id}`) || el())
     container.id = id
     container.classList.add('toast-container')
-    container.style[options.position] = '0';
+    container.style[options.position] = String(0);
     container.style.justifyItems = options.justify;
     document.body?.appendChild(container)
     return container
@@ -76,10 +76,7 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
 const notify = (message: string, options: ToastOptions | object = {}): HTMLDivElement => {
     const _optionsOfType: ToastOptions = ToastTypes.getType('type' in options ? options['type'] : 'default')
     const _options: ToastOptions = {..._optionsOfType, ...options}
-    const container = getContainer(_options)
-    const toast = <HTMLDivElement>el()
-    const msg = el()
-    const rm = () => toast.remove()
+    const container = getContainer(_options), toast = el(), msg = el(), rm = () => toast.remove()
 
     toast.classList.add('toast-element')
     toast.style.backgroundColor = _options.bgColor;
@@ -92,10 +89,8 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
     msg.style.display = 'flex'
     msg.innerHTML = message
 
-    if (_options.dismissible) {
-        ev(toast, 'click', rm)
-    }
-
+    if (_options.dismissible) ev(toast, 'click', rm)
+    if (_options.duration) setTimeout(rm, _options.duration)
     if (_options.closeBtn) {
         const btn = el()
         btn.classList.add('toast-btn')
@@ -104,14 +99,10 @@ const notify = (message: string, options: ToastOptions | object = {}): HTMLDivEl
         ev(btn, 'click', rm)
     }
 
-    if (_options.duration) {
-        setTimeout(rm, _options.duration)
-    }
-
     ev(toast, 'click', () => toast.classList.remove('toast-animation'))
     toast.classList.add('toast-animation');
 
-    return toast
+    return <HTMLDivElement>toast
 }
 
 const info = (message: string, options: ToastOptions | object = {}) => notify(message, {...options, ...{type: 'info'}})
