@@ -44,9 +44,14 @@ toast.types.default.maxWidth = 300
 ```js
 import toast from '@brenoroosevelt/toast'
 
+// define new custom type
 toast.types.setType('myType', {bgColor: "blue", position: "bottom", duration: 3000})
 
-toast.notify("Hello", {type: "myType", duration: 2000})
+// override a built-in type configurantion
+toast.types.setType('error', {position: "top", align: "center"})
+
+toast.notify("Hello notification")
+toast.error("Hello error")
 ```
 ## License
 This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.md) file for license rights and limitations.
