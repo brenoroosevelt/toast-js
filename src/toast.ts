@@ -1,7 +1,7 @@
 type ToastOptions = {
     type: string,
     position: 'top' | 'bottom',
-    justify: 'start' | 'center' | 'end',
+    align: 'start' | 'center' | 'end',
     bgColor: string,
     color: string,
     duration: number,
@@ -18,7 +18,7 @@ type ToastOptions = {
 const _default: ToastOptions = {
     type: 'default',
     position: 'top',
-    justify: 'end',
+    align: 'end',
     bgColor: '#333',
     color: '#fff',
     closeBtn: true,
@@ -64,13 +64,13 @@ const style = {
 }
 
 const getContainer = (options: ToastOptions): HTMLDivElement => {
-    const id = `toast-container-${options.position}-${options.justify}`;
+    const id = `toast-container-${options.position}-${options.align}`;
     const container = <HTMLDivElement>(document.querySelector(`#${id}`) || el())
     container.id = id
     container.setAttribute('style', style.cnt)
     container.classList.add('br-toast-container')
     container.style[options.position] = String(0);
-    container.style.justifyItems = options.justify;
+    container.style.justifyItems = options.align;
     document.body?.append(container)
     return container
 }
