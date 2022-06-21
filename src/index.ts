@@ -1,6 +1,5 @@
 import {
-    ToastOptions,
-    ToastTypes,
+    ToastTypes as types,
     notify,
     info,
     warning,
@@ -8,9 +7,8 @@ import {
     error
 } from "./toast";
 
-export {
-    ToastOptions,
-    ToastTypes,
+export default {
+    types,
     notify,
     info,
     warning,

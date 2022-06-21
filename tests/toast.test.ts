@@ -1,19 +1,19 @@
-import {ToastTypes} from "../src";
+import {ToastTypes as types} from "../src/toast";
 
 test('set new type', () => {
     const newType = {bgColor: 'red', closeBtn: false}
-    ToastTypes.setType('new', newType)
-    expect(ToastTypes.getType('new').bgColor).toBe('red');
-    expect(ToastTypes.getType('new').closeBtn).toBe(false);
-    expect(ToastTypes.getType('new').justify).toBe(ToastTypes.default.justify);
-    expect(ToastTypes.getType('new').position).toBe(ToastTypes.default.position);
-    expect(ToastTypes.getType('new').duration).toBe(ToastTypes.default.duration);
+    types.setType('new', newType)
+    expect(types.getType('new').bgColor).toBe('red');
+    expect(types.getType('new').closeBtn).toBe(false);
+    expect(types.getType('new').justify).toBe(types.default.justify);
+    expect(types.getType('new').position).toBe(types.default.position);
+    expect(types.getType('new').duration).toBe(types.default.duration);
 });
 
 test('override a type', () => {
-    const before = ToastTypes.getType('error')
-    ToastTypes.setType('error', {closeBtn: false})
-    const after = ToastTypes.getType('error')
+    const before = types.getType('error')
+    types.setType('error', {closeBtn: false})
+    const after = types.getType('error')
     expect(after.closeBtn).toBe(false);
     expect(after.bgColor).toBe(before.bgColor);
     expect(after.justify).toBe(before.justify);
@@ -22,12 +22,12 @@ test('override a type', () => {
 });
 
 test('get default type', () => {
-    const aType = ToastTypes.getType('any')
-    expect(aType.closeBtn).toBe(ToastTypes.default.closeBtn);
-    expect(aType.bgColor).toBe(ToastTypes.default.bgColor);
-    expect(aType.justify).toBe(ToastTypes.default.justify);
-    expect(aType.position).toBe(ToastTypes.default.position);
-    expect(aType.duration).toBe(ToastTypes.default.duration);
+    const aType = types.getType('any')
+    expect(aType.closeBtn).toBe(types.default.closeBtn);
+    expect(aType.bgColor).toBe(types.default.bgColor);
+    expect(aType.justify).toBe(types.default.justify);
+    expect(aType.position).toBe(types.default.position);
+    expect(aType.duration).toBe(types.default.duration);
 });
 
 
