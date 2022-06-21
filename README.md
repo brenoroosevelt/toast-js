@@ -41,7 +41,7 @@ toast.success("Hi, i`am a toast", options)
 | align       | string  | end     | start, center, end                     |
 | bgColor     | string  | #333    | css background-color                   |
 | color       | string  | #fff    | css color                              |
-| duration    | number  | 10000   | time in ms                             |
+| duration    | number  | 10000   | time in ms, 0 to disable               |
 | closeBtn    | boolean | true    | show close button                      |
 | zIndex      | number  | 99999   | css z-index                            |
 | dismissible | boolean | true    | dismiss on click                       |
