@@ -2,7 +2,7 @@
 
 ## Installation
 ```bash
-npm install @brenoroosevelt/toast --save
+npm i @brenoroosevelt/toast
 ```
 
 ## Usage
@@ -25,7 +25,8 @@ const options = {
     //maxWidth: number
 }
 
-toast.notify("Hi, i`am a notification", options) // `options` is not required
+// `options` is not required
+toast.notify("Hi, i`am a notification", options) 
 toast.info("Hi, i`am an toast", options)
 toast.waring("Hi, i`am a toast", options)
 toast.error("Hi, i`am a toast", options)
@@ -33,6 +34,23 @@ toast.success("Hi, i`am a toast", options)
 ```
 
 ## Default Options
+| Attribute   | Type    | Default | Values                                 |
+|-------------|---------|---------|----------------------------------------|
+| type        | string  | default | default, error, info, warning, success |
+| position    | string  | top     | top, bottom                            |
+| align       | string  | end     | start, center, end                     |
+| bgColor     | string  | #333    | css background-color                   |
+| color       | string  | #fff    | css color                              |
+| duration    | number  | 10000   | time in ms                             |
+| closeBtn    | boolean | true    | show close button                      |
+| zIndex      | number  | 99999   | css z-index                            |
+| dismissible | boolean | true    | dismiss on click                       |
+| shadow      | boolean | true    | display shadow                         |
+| animateIn   | number  | 200     | animation time in ms; 0 to disable     |
+| animateOut  | number  | 150     | animation time in ms; 0 to disable     |
+| append      | boolean | true    | true = end, false = begin              |
+| maxWidth    | number  | 0       | max width in px                        |
+
 ```js
 import toast from '@brenoroosevelt/toast'
 
