@@ -54,5 +54,5 @@ toast.notify("Hello notification")
 toast.error("Hello error")
 ```
 ## License
-This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE.md) file for license rights and limitations.
+This project is licensed under the terms of the MIT license.
 
