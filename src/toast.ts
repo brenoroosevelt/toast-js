@@ -12,7 +12,7 @@ type ToastOptions = {
     animateIn: number,
     animateOut: number,
     append: boolean,
-    maxWidth: 0
+    maxWidth: number
 }
 
 const _default: ToastOptions = {
