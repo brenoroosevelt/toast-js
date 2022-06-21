@@ -27,7 +27,7 @@ const _default: ToastOptions = {
     dismissible: true,
     shadow: true,
     animateIn: 200,
-    animateOut: 200,
+    animateOut: 150,
     append: true,
     maxWidth: 0
 }
