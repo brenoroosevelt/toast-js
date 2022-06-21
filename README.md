@@ -9,14 +9,11 @@ npm i @brenoroosevelt/toast
 ```js
 import toast from '@brenoroosevelt/toast'
 
-const options = { /** ... */}
-
-// `options` is not required
-toast.notify("Hi, i`am a notification", options) 
-toast.info("Hi, i`am an toast", options)
-toast.waring("Hi, i`am a toast", options)
-toast.error("Hi, i`am a toast", options)
-toast.success("Hi, i`am a toast", options)
+toast.notify("Hi, i`am a toast", /** options = {} */) 
+toast.info("Hi, i`am an toast",  /** options = {} */)
+toast.waring("Hi, i`am a toast", /** options = {} */)
+toast.error("Hi, i`am a toast",  /** options = {} */)
+toast.success("Hi, i`am a toast",/** options = {} */)
 ```
 
 ## Default Options
