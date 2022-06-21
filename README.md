@@ -25,7 +25,7 @@ const options = {
     //maxWidth: number
 }
 
-toast.notify("Hi, i`am a notification", options)
+toast.notify("Hi, i`am a notification", options) // `options` is not required
 toast.info("Hi, i`am an toast", options)
 toast.waring("Hi, i`am a toast", options)
 toast.error("Hi, i`am a toast", options)
