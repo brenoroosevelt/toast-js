@@ -95,7 +95,7 @@ const notify = (message: string, options: Partial<ToastOptions> = {}): HTMLDivEl
 
     if (_options.dismissible) ev(toast, 'click', dismiss)
     if (_options.duration) setTimeout(dismiss, _options.duration)
-    if (_options.shadow) toast.style.boxShadow = '0 0.05rem 0.75rem rgba(0, 0, 0, 0.5)'
+    if (_options.shadow) toast.style.boxShadow = '0 3px 10px rgba(0,0,0,0.4)'
     if (_options.maxWidth) toast.style.maxWidth = _options.maxWidth + 'px'
     if (_options.closeBtn) {
         const btn = el()
