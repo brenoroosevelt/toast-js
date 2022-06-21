@@ -68,6 +68,7 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
     const container = <HTMLDivElement>(document.querySelector(`#${id}`) || el())
     container.id = id
     container.setAttribute('style', style.cnt)
+    container.classList.add('br-toast-container')
     container.style[options.position] = String(0);
     container.style.justifyItems = options.justify;
     document.body?.append(container)
@@ -86,11 +87,13 @@ const notify = (message: string, options: Partial<ToastOptions> = {}): HTMLDivEl
     }
 
     toast.setAttribute('style', style.elm)
+    container.classList.add('br-toast-element')
     toast.style.backgroundColor = _options.bgColor;
     toast.style.color = _options.color;
     container.style.zIndex = _options.zIndex.toString()
 
     msg.style.display = 'flex'
+    container.classList.add('br-toast-message')
     msg.innerHTML = message
 
     if (_options.dismissible) ev(toast, 'click', dismiss)
@@ -100,6 +103,7 @@ const notify = (message: string, options: Partial<ToastOptions> = {}): HTMLDivEl
     if (_options.closeBtn) {
         const btn = el()
         btn.setAttribute('style', style.btn)
+        container.classList.add('br-toast-close-btn')
         btn.innerHTML = '&#x2715'
         toast.append(btn)
         ev(btn, 'click', dismiss)
