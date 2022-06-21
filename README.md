@@ -9,21 +9,7 @@ npm i @brenoroosevelt/toast
 ```js
 import toast from '@brenoroosevelt/toast'
 
-const options = {
-    //position: 'top' | 'bottom',
-    //align: 'start' | 'center' | 'end',
-    //bgColor: string,
-    //color: string,
-    //duration: number,
-    //closeBtn: boolean,
-    //zIndex: number,
-    //dismissible: boolean,
-    //shadow: boolean,
-    //animateIn: number,
-    //animateOut: number,
-    //append: boolean,
-    //maxWidth: number
-}
+const options = { /** ... */}
 
 // `options` is not required
 toast.notify("Hi, i`am a notification", options) 
