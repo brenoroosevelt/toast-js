@@ -4,6 +4,7 @@
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "type": "module",
+  "keywords": ["snack bar", "notification", "toast", "notify", "popup", "alert"],
   "files": [
     "lib/"
   ],
