@@ -70,9 +70,9 @@ const merge = (a: Partial<ToastOptions>, b: Partial<ToastOptions>): Partial<Toas
 }
 
 const style = {
-    cnt: '.br-toast-container{font-family:sans-serif;font-size:15px;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.75rem;pointer-events:none}',
-    elm: '.br-toast-element{padding:0.75rem;margin:0 1rem;border-radius:5px;pointer-events:auto;transform-origin:50% 0;box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3)}.br-toast-element:hover{box-shadow: 0 1px 10px 0 rgba(0,0,0,0.5)}',
-    btn: '.br-toast-close-btn{width:23px; height:23px; display:flex;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:5px;margin-left:0.5rem;border-radius:3px}',
+    cnt: '.br-toast-container{font-family:sans-serif;font-size:14px;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.60rem;pointer-events:none}',
+    elm: '.br-toast-element{padding:0.6rem;margin:0 1rem;border-radius:5px;pointer-events:auto;transform-origin:50% 0;box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3)}.br-toast-element:hover{box-shadow: 0 1px 10px 0 rgba(0,0,0,0.5)}',
+    btn: '.br-toast-close-btn{width:24px; height:24px; display:flex;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:0px 5px;margin-left:0.5rem;border-radius:4px}',
     msg: '.br-toast-message{margin:0; padding:0; display: block;}',
     tlt: '.br-toast-title{width: 100%;margin:0;font-weight:bold; display:block}',
     act: '.br-toast-action{background:rgba(0,0,0,0.5); color: #fff; border-radius: 3px; margin: 10px 10px 0 0; padding: 6px 10px; cursor: pointer; border: 0}.br-toast-action:hover{box-shadow:0px 1px 8px 1px rgba(0,0,0,0.5);}',
@@ -98,7 +98,7 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
     return container
 }
 
-const create = (message: string, options: Partial<ToastOptions> = {}): Promise<ToastAction> => {
+const create = (message: string | undefined | null, options: Partial<ToastOptions> = {}): Promise<ToastAction> => {
     return new Promise((resolve, reject) => {
         const _optionsOfType: ToastOptions = ToastTypes.getType(options['type'] || 'default')
         const _options: ToastOptions = <ToastOptions>merge(_optionsOfType, options)
@@ -125,7 +125,7 @@ const create = (message: string, options: Partial<ToastOptions> = {}): Promise<T
         container.style.zIndex = _options.zIndex.toString()
 
         msg.classList.add('br-toast-message')
-        msg.innerHTML = message
+        msg.innerHTML = message || ''
 
         if (_options.dismissible) ev(toast, 'click', () => dismiss({text: "click", value: "click"}))
         if (_options.duration) setTimeout(() => dismiss({text: "timeout", value: "timeout"}), _options.duration)
@@ -164,11 +164,11 @@ const create = (message: string, options: Partial<ToastOptions> = {}): Promise<T
     })
 }
 
-const info = (message: string, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'info'}))
-const warning = (message: string, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'warning'}))
-const error = (message: string, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'error'}))
-const success = (message: string, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'success'}))
-const system = (message: string, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'system'}))
+const info = (message: string | undefined | null, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'info'}))
+const warning = (message: string | undefined | null, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'warning'}))
+const error = (message: string | undefined | null, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'error'}))
+const success = (message: string | undefined | null, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'success'}))
+const system = (message: string | undefined | null, options: Partial<ToastOptions> = {}) => create(message, merge(options, {type: 'system'}))
 
 export {
     ToastOptions,
