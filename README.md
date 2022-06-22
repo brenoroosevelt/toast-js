@@ -9,12 +9,12 @@ npm i @brenoroosevelt/toast
 ```js
 import toast from '@brenoroosevelt/toast'
 
-toast.system ("Hi, i`am a toast", /** options = {} */) 
-toast.info   ("Hi, i`am a toast", /** options = {} */)
-toast.warning("Hi, i`am a toast", /** options = {} */)
-toast.error  ("Hi, i`am a toast", /** options = {} */)
-toast.success("Hi, i`am a toast", /** options = {} */)
-toast.create ("Hi, i`am a toast", /** options = {} */)
+toast.system ("Hi, i am a notification", /** options = {} */) 
+toast.info   ("Hi, i am a notification", /** options = {} */)
+toast.warning("Hi, i am a notification", /** options = {} */)
+toast.error  ("Hi, i am a notification", /** options = {} */)
+toast.success("Hi, i am a notification", /** options = {} */)
+toast.create ("Hi, i am a notification", /** options = {} */)
 ```
 
 ## Default Options
@@ -61,9 +61,9 @@ toast.error("Hello error")
 
 ## Promise based
 ```js
-toast.info("hi, i`m a toast").then((result) => console.log(result))
+toast.info("hi, i m a notification").then((result) => console.log(result))
     
-toast.create("hi, i`m a toast with actions", {
+toast.create("Notification with actions", {
     position: "top",
     actions: [
         {text: "Yes", value: "ok"},
