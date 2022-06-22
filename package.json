@@ -11,13 +11,16 @@
   "scripts": {
     "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
     "prepublishOnly": "npm run tsc",
-    "test": "jest"
+    "test": "jest",
+    "serve": "live-server --cors --open=/sample"
   },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^26.0.20",
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vue": "^2.6.14",
+    "live-server": "^1.2.2"
   }
 }

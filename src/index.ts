@@ -1,17 +1,21 @@
 import {
     ToastTypes as types,
-    notify,
+    create,
     info,
     warning,
     success,
-    error
+    error,
+    system,
+    action
 } from "./toast";
 
 export default {
     types,
-    notify,
+    notify: create,
     info,
     warning,
     success,
-    error
+    error,
+    system,
+    action
 }

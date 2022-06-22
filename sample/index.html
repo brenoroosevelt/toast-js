@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toast-js sample</title>
+</head>
+<body style="background: #f2f2f2">
+<div id="app">
+    {{nome}}
+</div>
+<script type="module">
+    import * as toast from "../lib/esm/toast.js"
+    import Vue from "../node_modules/vue/dist/vue.esm.browser.js"
+    const actions = {actions: [
+            {text:'Abrir', value: 'aaaa'},
+            // {text:'Rejeitar', value: 'abbbb'},
+        ]};
+    toast.ToastTypes.default.duration = 0
+    toast.info('exto curso', {...{title: 'Este é um título bem longo mesmo'}, ...actions})
+    toast.error('', {title: 'Ops! Algo deu errado'})
+    toast.warning('Hi, i`am a toast', actions)
+    toast.info('Não é possível carregar todos os arquivos gerados', actions)
+    toast.success('Hi, i`am a toast', actions)
+    toast.system('Hi, i`am a toast with actions', actions).then(r => console.log(r))
+
+    toast.action(['a', 'b']).then(r => console.log(r))
+
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                nome: 'aaa'
+            }
+        }
+    })
+</script>
+<style>
+
+</style>
+</body>
+</html>
