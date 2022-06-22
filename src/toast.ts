@@ -31,7 +31,7 @@ const _default: ToastOptions = {
     align: 'end',
     bgColor: '#333',
     color: '#fff',
-    closeBtn: false,
+    closeBtn: true,
     duration: 10000,
     zIndex: 99999,
     dismissible: true,
