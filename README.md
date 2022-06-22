@@ -35,7 +35,7 @@ toast.create ("Hi, i`am a toast", /** options = {} */)
 | animateOut  | number                                                             | 150       | animation time in ms; 0 to disable             |
 | append      | boolean                                                            | true      | true = end, false = begin                      |
 | maxWidth    | number                                                             | 0         | max width in px                                |
-| actions     | [{<br/>text: string, <br/>value: any, bgColor?: string, color?: string},...] | []        | button actions                                 |
+| actions     | [{<br/>text: string, <br/>value: any, <br/>bgColor?: string, <br/>color?: string},<br/>...<br/>] | []        | button actions                                 |
 
 ```js
 import toast from '@brenoroosevelt/toast'
