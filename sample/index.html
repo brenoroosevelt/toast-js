@@ -4,46 +4,42 @@
     <meta charset="UTF-8">
     <title>Toast-js sample</title>
 </head>
-<body style="background: #f2f2f2">
+<body style="background: #fff">
 <div id="app">
     {{nome}}
 </div>
 <script type="module">
     import * as toast from "../lib/esm/toast.js"
     import Vue from "../node_modules/vue/dist/vue.esm.browser.js"
-    const actions = {actions: [
-            {text:'Abrir', value: 'aaaa'},
-            // {text:'Rejeitar', value: 'abbbb'},
-        ]};
-    toast.ToastTypes.default.duration = 0
-    toast.info('exto curso', {...{title: 'Este é um título bem longo mesmo', closeBtn: false, shadow:false, dismissible: false}, ...actions}).then(r => console.log(r))
-    toast.error('', {title: 'Ops! Algo deu errado'}).then(r => console.log(r))
-    toast.warning('Hi, i`am a toast', actions).then(r => console.log(r))
-    toast.system('Não é possível carregar todos os arquivos gerados', actions).then(r => console.log(r))
-    toast.success('Hi, i`am a toast', actions).then(r => console.log(r))
-    toast.create('Hi, i`am a toast with actions', {duration: 1500}).then(r => console.log(r))
-
-    toast.info("hi, i`m a toast")
-    toast.success("hi, i`m a toast", {duration: 5000, align: "center"})
-    toast.error("hi, i`m a toast", {title: "Ops!", dismissible: false})
-    toast.warning("hi, i`m a toast", {title: "Attention!", closeBtn: false, position: "bottom"})
-    toast.system("hi, i`m a toast", {closeBtn: false, position: "bottom", align: "start"})
-
-    toast.info("hi, i`m a toast").then((result) => console.log(result))
-
-    toast.create("hi, i`m a toast with actions", {
-        position: "top",
-        actions: [
-            {text: "Yes", value: "ok"},
-            {text: "No", value: "no"},
-        ]
-    }).then((result) => {
-        if (result.value === "ok") console.log("user say `yes`")
-        if (result.value === "no") console.log("user say `no`")
-        if (result.value === "click") console.log("user click to dismiss")
-        if (result.value === "close-btn") console.log("user click close button")
-        if (result.value === "timeout") console.log("notification has timed out")
-    })
+    toast.ToastTypes.default.closeBtn = true
+    toast.system ("Hi, i'm a notification (system)")
+    toast.info   ("Hi, i'm a notification (info)", /** options = {} */)
+    toast.warning("Hi, i'm a notification (warning)", /** options = {} */)
+    toast.error  ("Hi, i'm a notification (error)", /** options = {} */)
+    toast.success("Hi, i'm a notification (success)", /** options = {} */)
+    toast.create ("Hi, i'm a notification (default)", /** options = {} */)
+    //
+    // toast.info("hi, i`m a toast")
+    // toast.success("hi, i`m a toast", {duration: 5000, align: "center"})
+    // toast.error("hi, i`m a toast", {title: "Ops!", dismissible: false})
+    // toast.warning("hi, i`m a toast", {title: "Attention!", closeBtn: false, position: "bottom"})
+    // toast.system("hi, i`m a toast", {closeBtn: false, position: "bottom", align: "start"})
+    //
+    // toast.info("hi, i`m a toast").then((result) => console.log(result))
+    //
+    // toast.create("hi, i`m a toast with actions", {
+    //     position: "top",
+    //     actions: [
+    //         {text: "Yes", value: "ok"},
+    //         {text: "No", value: "no"},
+    //     ]
+    // }).then((result) => {
+    //     if (result.value === "ok") console.log("user say `yes`")
+    //     if (result.value === "no") console.log("user say `no`")
+    //     if (result.value === "click") console.log("user click to dismiss")
+    //     if (result.value === "close-btn") console.log("user click close button")
+    //     if (result.value === "timeout") console.log("notification has timed out")
+    // })
 
     new Vue({
         el: "#app",

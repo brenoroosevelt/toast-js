@@ -1,5 +1,5 @@
 # Toast-js
-
+![toast notification image](toast-js.png)
 ## Installation
 ```bash
 npm i @brenoroosevelt/toast
@@ -11,7 +11,7 @@ import toast from '@brenoroosevelt/toast'
 
 toast.system ("Hi, i`am a toast", /** options = {} */) 
 toast.info   ("Hi, i`am a toast", /** options = {} */)
-toast.waring ("Hi, i`am a toast", /** options = {} */)
+toast.warning("Hi, i`am a toast", /** options = {} */)
 toast.error  ("Hi, i`am a toast", /** options = {} */)
 toast.success("Hi, i`am a toast", /** options = {} */)
 toast.create ("Hi, i`am a toast", /** options = {} */)
