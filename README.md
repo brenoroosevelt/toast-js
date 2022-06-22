@@ -18,24 +18,24 @@ toast.create ("Hi, i`am a toast", /** options = {} */)
 ```
 
 ## Default Options
-| Attribute   | Type          | Default   | Values / Description                  |
-|-------------|---------------|-----------|---------------------------------------|
-| type        | string        | default   | system, error, info, warning, success |
-| title       | string        | undefined | notification title                    |
-| position    | string        | top       | top, bottom                           |
-| align       | string        | end       | start, center, end                    |
-| bgColor     | string        | #333      | css background-color                  |
-| color       | string        | #fff      | css color                             |
-| duration    | number        | 10000     | time in ms, 0 to disable              |
-| closeBtn    | boolean       | true      | show close button                     |
-| zIndex      | number        | 99999     | css z-index                           |
-| dismissible | boolean       | true      | dismiss on click                      |
-| shadow      | boolean       | true      | display shadow                        |
-| animateIn   | number        | 200       | animation time in ms; 0 to disable    |
-| animateOut  | number        | 150       | animation time in ms; 0 to disable    |
-| append      | boolean       | true      | true = end, false = begin             |
-| maxWidth    | number        | 0         | max width in px                       |
-| actions     | ToastAction[] | []        | button actions                        |
+| Attribute   | Type          | Default   | Values / Description                           |
+|-------------|---------------|-----------|------------------------------------------------|
+| type        | string        | default   | default, system, error, info, warning, success |
+| title       | string        | undefined | notification title                             |
+| position    | string        | top       | top, bottom                                    |
+| align       | string        | end       | start, center, end                             |
+| bgColor     | string        | #333      | css background-color                           |
+| color       | string        | #fff      | css color                                      |
+| duration    | number        | 10000     | time in ms, 0 to disable                       |
+| closeBtn    | boolean       | true      | show close button                              |
+| zIndex      | number        | 99999     | css z-index                                    |
+| dismissible | boolean       | true      | dismiss on click                               |
+| shadow      | boolean       | true      | display shadow                                 |
+| animateIn   | number        | 200       | animation time in ms; 0 to disable             |
+| animateOut  | number        | 150       | animation time in ms; 0 to disable             |
+| append      | boolean       | true      | true = end, false = begin                      |
+| maxWidth    | number        | 0         | max width in px                                |
+| actions     | ToastAction[] | []        | button actions                                 |
 
 ```js
 import toast from '@brenoroosevelt/toast'
