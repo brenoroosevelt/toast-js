@@ -25,7 +25,7 @@ toast.create ("Hi, i`am a toast", /** options = {} */)
 | position    | string                                                             | top       | top, bottom                                                                                           |
 | align       | string                                                             | end       | start, center, end                                                                                    |
 | bgColor     | string                                                             | #333      | css background-color                                                                                  |
-| color       | string                                                             | #fff      | css color                                                                                             |
+| color       | string                                                             | #fff      | css text color                                                                                        |
 | duration    | number                                                             | 10000     | time in ms, 0 to disable                                                                              |
 | closeBtn    | boolean                                                            | true      | show close button                                                                                     |
 | zIndex      | number                                                             | 99999     | css z-index                                                                                           |
