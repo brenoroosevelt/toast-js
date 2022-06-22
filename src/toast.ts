@@ -99,59 +99,61 @@ const getContainer = (options: ToastOptions): HTMLDivElement => {
 }
 
 const create = (message: string, options: Partial<ToastOptions> = {}): Promise<ToastAction> => {
-    const _optionsOfType: ToastOptions = ToastTypes.getType(options['type'] || 'default')
-    const _options: ToastOptions = <ToastOptions>merge(_optionsOfType, options)
-    const container = getContainer(_options), toast = el(), msg = el('p')
-    const animateIn = () => toast.animate([{transform: 'scaleY(0)'}, {transform: 'scaleY(1)'}], _options.animateIn)
-    const animateOut = () => toast.animate([{transform: 'scaleY(1)'}, {transform: 'scaleY(0)'}], _options.animateOut)
-    const remove = () => toast.remove()
-    const dismiss  = () => {
-        if (_options.animateOut && toast) animateOut().addEventListener('finish', () => remove())
-        else remove()
-    }
-
-    toast.classList.add('br-toast-element')
-    toast.style.backgroundColor = _options.bgColor;
-    toast.style.color = _options.color;
-    container.style.zIndex = _options.zIndex.toString()
-
-    msg.style.display = 'flex'
-    msg.classList.add('br-toast-message')
-    msg.innerHTML = message
-
-    if (_options.dismissible) ev(toast, 'click', dismiss)
-    if (_options.duration) setTimeout(dismiss, _options.duration)
-    if (!_options.shadow) toast.style.boxShadow = 'none'
-    if (_options.maxWidth) toast.style.maxWidth = _options.maxWidth + 'px'
-    if (_options.closeBtn) {
-        const btn = el()
-        btn.classList.add('br-toast-close-btn')
-        btn.innerHTML = '&#x2715'
-        toast.append(btn)
-        ev(btn, 'click', dismiss)
-    }
-
-    if (_options.title) {
-        const title = el('p')
-        title.classList.add('br-toast-title')
-        title.innerHTML = _options.title
-        toast.append(title)
-    }
-
-    toast.append(msg)
-    _options.append ? container.append(toast) : container.prepend(toast)
-    if (_options.animateIn) animateIn()
-
     return new Promise((resolve, reject) => {
+        const _optionsOfType: ToastOptions = ToastTypes.getType(options['type'] || 'default')
+        const _options: ToastOptions = <ToastOptions>merge(_optionsOfType, options)
+        const container = getContainer(_options), toast = el(), msg = el('p')
+        const animateIn = () => toast.animate([{transform: 'scaleY(0)'}, {transform: 'scaleY(1)'}], _options.animateIn)
+        const animateOut = () => toast.animate([{transform: 'scaleY(1)'}, {transform: 'scaleY(0)'}], _options.animateOut)
+        const remove = (action: ToastAction) => {
+            toast.remove()
+            resolve(action)
+        }
+        const dismiss  = (action: ToastAction) => {
+            if (_options.animateOut && toast) animateOut().addEventListener('finish', () => remove(action))
+            else remove(action)
+        }
+
+        toast.classList.add('br-toast-element')
+        toast.style.backgroundColor = _options.bgColor;
+        toast.style.color = _options.color;
+        container.style.zIndex = _options.zIndex.toString()
+
+        msg.style.display = 'flex'
+        msg.classList.add('br-toast-message')
+        msg.innerHTML = message
+
+        if (_options.dismissible) ev(toast, 'click', () => dismiss({text: "click", value: "click"}))
+        if (_options.duration) setTimeout(() => dismiss({text: "timeout", value: "timeout"}), _options.duration)
+        if (!_options.shadow) toast.style.boxShadow = 'none'
+        if (_options.maxWidth) toast.style.maxWidth = _options.maxWidth + 'px'
+        if (_options.closeBtn) {
+            const btn = el()
+            btn.classList.add('br-toast-close-btn')
+            btn.innerHTML = '&#x2715'
+            toast.append(btn)
+            ev(btn, 'click', () => dismiss({text: "close-btn", value: "close-btn"}))
+        }
+
+        if (_options.title) {
+            const title = el('p')
+            title.classList.add('br-toast-title')
+            title.innerHTML = _options.title
+            toast.append(title)
+        }
+
+        toast.append(msg)
+        _options.append ? container.append(toast) : container.prepend(toast)
+        if (_options.animateIn) animateIn()
+
         _options.actions.forEach((action, i) => {
             const d = el('button')
             d.classList.add('br-toast-action')
             d.style.color = action.color || _options.color
             if (action.bgColor) d.style.backgroundColor = action.bgColor
-            d.innerText = action.text
+            d.innerHTML = action.text
             d.addEventListener('click', (e) => {
-                resolve(action)
-                dismiss()
+                dismiss(action)
             })
             toast.appendChild(d)
         })
