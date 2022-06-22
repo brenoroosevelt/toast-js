@@ -5,8 +5,7 @@ import {
     warning,
     success,
     error,
-    system,
-    action
+    system
 } from "./toast";
 
 export default {
@@ -16,6 +15,5 @@ export default {
     warning,
     success,
     error,
-    system,
-    action
+    system
 }

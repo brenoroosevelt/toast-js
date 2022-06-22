@@ -65,7 +65,6 @@ const ToastTypes = {
 
 const el = (e = 'div') => document.createElement(e)
 const ev = (el: Element, ev: string, f: any) => el.addEventListener(ev, f)
-const get = (s: string) => document.querySelector(s)
 const merge = (a: Partial<ToastOptions>, b: Partial<ToastOptions>): Partial<ToastOptions> => {
     return {...a, ...b}
 }
