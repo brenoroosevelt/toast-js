@@ -10,7 +10,7 @@ import {
 
 export default {
     types,
-    notify: create,
+    create,
     info,
     warning,
     success,
