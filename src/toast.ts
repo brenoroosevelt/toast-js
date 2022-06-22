@@ -72,9 +72,9 @@ const merge = (a: Partial<ToastOptions>, b: Partial<ToastOptions>): Partial<Toas
 const style = {
     cnt: '.br-toast-container{font-family:sans-serif;font-size:15px;position:fixed;left:0;width:100%;margin:1rem 0;padding:0;display:grid;gap:0.75rem;pointer-events:none}',
     elm: '.br-toast-element{padding:0.75rem;margin:0 1rem;border-radius:5px;pointer-events:auto;transform-origin:50% 0;box-shadow: 0 1px 5px 0 rgba(0,0,0,0.3)}.br-toast-element:hover{box-shadow: 0 1px 10px 0 rgba(0,0,0,0.5)}',
-    btn: '.br-toast-close-btn{display:flex;float:right;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:1px 3px;margin-left:0.5rem;border-radius:3px}',
-    msg: '.br-toast-message{margin:0; padding-top:2px}',
-    tlt: '.br-toast-title{width: 100%;margin:0 0 2px 0;font-weight:bold; display:inline}',
+    btn: '.br-toast-close-btn{width:23px; height:23px; display:flex;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:5px;margin-left:0.5rem;border-radius:3px}',
+    msg: '.br-toast-message{margin:0; padding:0; display: block;}',
+    tlt: '.br-toast-title{width: 100%;margin:0;font-weight:bold; display:block}',
     act: '.br-toast-action{background:rgba(0,0,0,0.5); color: #fff; border-radius: 3px; margin: 10px 10px 0 0; padding: 6px 10px; cursor: pointer; border: 0}.br-toast-action:hover{box-shadow:0px 1px 8px 1px rgba(0,0,0,0.5);}',
     initialized: false,
     init() {
@@ -114,12 +114,16 @@ const create = (message: string, options: Partial<ToastOptions> = {}): Promise<T
             else remove(action)
         }
 
+        const inner = el()
+        toast.style.display ='flex'
+        toast.style.justifyContent = 'space-between'
+        toast.append(inner)
+
         toast.classList.add('br-toast-element')
         toast.style.backgroundColor = _options.bgColor;
         toast.style.color = _options.color;
         container.style.zIndex = _options.zIndex.toString()
 
-        msg.style.display = 'flex'
         msg.classList.add('br-toast-message')
         msg.innerHTML = message
 
@@ -139,10 +143,10 @@ const create = (message: string, options: Partial<ToastOptions> = {}): Promise<T
             const title = el('p')
             title.classList.add('br-toast-title')
             title.innerHTML = _options.title
-            toast.append(title)
+            inner.append(title)
         }
 
-        toast.append(msg)
+        inner.append(msg)
         _options.append ? container.append(toast) : container.prepend(toast)
         if (_options.animateIn) animateIn()
 
