@@ -34,7 +34,7 @@ toast.create ("Hi, i`am a toast", /** options = {} */)
 | animateIn   | number                                                             | 200       | animation time in ms; 0 to disable                                                                    |
 | animateOut  | number                                                             | 150       | animation time in ms; 0 to disable                                                                    |
 | append      | boolean                                                            | true      | notifications will be added to the bottom/top of the list; (append=true: bottom), (append=false: top) |
-| maxWidth    | number                                                             | 0         | max width in px                                                                                       |
+| maxWidth    | number                                                             | 600       | max width in px                                                                                       |
 | actions     | [{<br/>text: string, <br/>value: any, <br/>bgColor?: string, <br/>color?: string<br/>}] | []        | button actions                                                                                        |
 
 ```js

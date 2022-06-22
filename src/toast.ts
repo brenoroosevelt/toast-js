@@ -39,7 +39,7 @@ const _default: ToastOptions = {
     animateIn: 200,
     animateOut: 150,
     append: true,
-    maxWidth: 0,
+    maxWidth: 600,
     actions: []
 }
 
