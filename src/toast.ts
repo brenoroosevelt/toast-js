@@ -75,7 +75,7 @@ const style = {
     btn: '.br-toast-close-btn{width:24px; height:24px; display:flex;align-items:center;cursor:pointer;background:rgba(0,0,0,0.1);padding:0px 5px;margin-left:0.5rem;border-radius:4px}',
     msg: '.br-toast-message{margin:0; padding:0; display: block;}',
     tlt: '.br-toast-title{width: 100%;margin:0;font-weight:bold; display:block}',
-    act: '.br-toast-action{background:rgba(0,0,0,0.5); color: #fff; border-radius: 3px; margin: 10px 10px 0 0; padding: 6px 10px; cursor: pointer; border: 0}.br-toast-action:hover{box-shadow:0px 1px 8px 1px rgba(0,0,0,0.5);}',
+    act: '.br-toast-action{background:rgba(0,0,0,0.5);color:#fff;border-radius:4px; margin:5px 10px 0 0; padding:4px 8px;cursor:pointer;border: 0}.br-toast-action:hover{box-shadow:0px 1px 8px 1px rgba(0,0,0,0.5);}',
     initialized: false,
     init() {
         if (this.initialized) return;
@@ -130,7 +130,7 @@ const create = (message: string | undefined | null, options: Partial<ToastOption
         if (_options.dismissible) ev(toast, 'click', () => dismiss({text: "click", value: "click"}))
         if (_options.duration) setTimeout(() => dismiss({text: "timeout", value: "timeout"}), _options.duration)
         if (!_options.shadow) toast.style.boxShadow = 'none'
-        if (_options.maxWidth) toast.style.maxWidth = _options.maxWidth + 'px'
+        if (_options.maxWidth && _options.maxWidth != 0) toast.style.maxWidth = _options.maxWidth + 'px'
         if (_options.closeBtn) {
             const btn = el()
             btn.classList.add('br-toast-close-btn')
@@ -150,6 +150,7 @@ const create = (message: string | undefined | null, options: Partial<ToastOption
         _options.append ? container.append(toast) : container.prepend(toast)
         if (_options.animateIn) animateIn()
 
+        const actionsContainer = el()
         _options.actions.forEach((action, i) => {
             const d = el('button')
             d.classList.add('br-toast-action')
@@ -159,8 +160,9 @@ const create = (message: string | undefined | null, options: Partial<ToastOption
             d.addEventListener('click', (e) => {
                 dismiss(action)
             })
-            toast.appendChild(d)
+            actionsContainer.appendChild(d)
         })
+        inner.appendChild(actionsContainer)
     })
 }
 

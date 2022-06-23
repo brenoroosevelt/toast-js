@@ -149,6 +149,7 @@
                 this.result = {...this.options, ...{
                         animateOut: this.animateOut ? 200 : 0,
                         animateIn: this.animateIn ? 200 : 0,
+                        actions: [{text: "aaa", value: 1}]
                     }}
 
                 toast.create(this.message, this.result)
