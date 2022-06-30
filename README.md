@@ -70,8 +70,8 @@ toast.create("Notification with actions", {
         {text: "No", value: "no"},
     ]
 }).then((result) => {
-    if (result.value === "ok") console.log("user say `yes`")
-    if (result.value === "no") console.log("user say `no`")
+    if (result.value === "ok") console.log("user says `yes`")
+    if (result.value === "no") console.log("user says `no`")
     if (result.value === "click") console.log("user click to dismiss")
     if (result.value === "close-btn") console.log("user click close button")
     if (result.value === "timeout") console.log("notification has timed out")
