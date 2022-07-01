@@ -186,6 +186,7 @@ toast.create ("Hi, i am a notification", /** options = {} */)</pre>
                 'warning',
                 'create'
             ].forEach((el) => (toast[el])('Hi, this is a notification', {duration: 5000, title: capitalize(el === 'create' ? 'default' : el) }))
+            toast.create('Hi, this is a notification', {duration: 5000, title: 'Custom', bgColor: '#7952b3'})
 
             new Vue({
                 el: "#app",
