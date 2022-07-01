@@ -1,6 +1,7 @@
 # Toast-js 
-Toast-js is an easy-to-use, dependency-free and Promise-based Javascript library for system notifications. See [Demo page](https://brenoroosevelt.github.io/toast-js)
+Toast-js is an easy-to-use, dependency-free and Promise-based Javascript library for system notifications.
 
+#### ==>> [Demo page](https://brenoroosevelt.github.io/toast-js) <===
 
 ![toast notification image](toast-js.png)
 ## Installation
