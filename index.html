@@ -225,7 +225,8 @@ toast.create ("Hi, i am a notification", /** options = {} */)</pre>
                         this.result = {...this.options, ...{
                                 animateOut: this.animateOut ? 200 : 0,
                                 animateIn: this.animateIn ? 200 : 0,
-                                actions: this.actions
+                                actions: this.actions,
+                                duration: parseInt(this.duration)
                             }}
 
                         if (this.customBgColor && this.bgColor) {
